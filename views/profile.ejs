@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WELCOME</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="script.css">
+	<script type="text/javascript"></script>
+	<style type="text/css">
+			.img-responsive{
+			  width: 100%;
+			  height: 100%;
+			}
+
+			.navbar.navbar-expand-lg.navbar-light.bg-light{
+			  height: 80px;
+			}
+			.jumbotron{
+			  margin-top: 15px;
+			}
+
+			.navbar-brand{
+			  padding-left: 20px;
+			}
+
+			.container{
+			  margin-top: 10px;
+			}
+			.caption{
+			  width: 80%;
+			  position: absolute;
+			  bottom: 1rem;
+			  left: 10%;
+			  background: rgba(255, 255, 255, 0.6);
+			}
+
+	</style>
+	
+</head>
+<body style="background:#ddd;">
+	<!-- <div class="container"> -->
+		<nav class="navbar navbar-expand-md navbar-light bg-light">
+		  		<a class="navbar-brand" href="/">STEM</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="	false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="nav navbar-nav ml-auto">
+				      <!-- <li class="nav-item active">
+				        	<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				      </li> -->
+					<% if(currentUser){%>
+				      
+						<li class="nav-item">
+				        	<a class="nav-link" href="#">Welcome <%= currentUser.username %></a>
+				      </li>
+					 <% } %>
+				      <li class="nav-item">
+				        	<a class="nav-link" href="/about">About</a>
+				      </li>
+					 <% if(!currentUser){%>
+				      <li class="nav-item">
+				        	<a class="nav-link " href="/login">Login</a>
+				      </li>
+					  <li class="nav-item">
+				        	<a class="nav-link " href="/signup">Sign Up</a>
+				      </li>
+					 <% }else {%>
+				      <li class="nav-item">
+				        	<a class="nav-link " href="/logout">Logout</a>
+				      </li>
+					<% } %>
+				 </ul>
+		  </div>
+		</nav>
+		
+	<div class="container">
+	
+		<div class="jumbotron">
+			    <h1><i class="fa fa-camera-retro"></i>Welcome <%= currentUser.username %></h1>
+			
+			    <!-- <h6>Learn Achieve Inspire</h6>
+			    <a class="btn btn-primary btn-large" href="/education/new" style="margin-top:10px">Add New Education Post</a>  -->
+				
+				
+	   </div>
+
+   </div>
+	
+
+	
+	
+	<div class="container">
+ 		<h1>Posts</h1>
+		<!-- <a class="btn btn-primary btn-large" href="/life" style="margin-top:10px">See Posts</a> -->
+ 		<div class="row">
+    <div class="col-lg-11 mx-auto">
+     
+      <div class="row py-5">
+		  
+        <% educationposts.forEach(function(educationposts){ %>
+		 
+        <div class="col-lg-4">
+          <figure class="rounded p-3 bg-white shadow-sm">
+            <img src=" <%= educationposts.image %>" alt="" class="w-100 card-img-top">
+            <figcaption class="p-4 card-img-bottom">
+              <h2 class="h5 font-weight-bold mb-2 font-italic">Education Post</h2>
+				<a class="btn btn-primary btn-large" href="/education/<%=educationposts._id %>" style="margin-top:10px">see more</a>
+              
+            </figcaption>
+          </figure>
+        </div>
+		  <% }); %>
+        
+        <% friendposts.forEach(function(friendposts){ %>
+		 
+        <div class="col-lg-4">
+          <figure class="rounded p-3 bg-white shadow-sm">
+            <img src=" <%= friendposts.image %>" alt="" class="w-100 card-img-top">
+            <figcaption class="p-4 card-img-bottom">
+              <h2 class="h5 font-weight-bold mb-2 font-italic">Friends Post</h2>
+				<a class="btn btn-primary btn-large" href="/friend/<%=friendposts._id %>" style="margin-top:10px">see more</a>
+              
+            </figcaption>
+          </figure>
+        </div>
+		  <% }); %>
+		  
+		  <% travelposts.forEach(function(travelposts){ %>
+		 
+        <div class="col-lg-4">
+          <figure class="rounded p-3 bg-white shadow-sm">
+            <img src=" <%= travelposts.image %>" alt="" class="w-100 card-img-top">
+            <figcaption class="p-4 card-img-bottom">
+              <h2 class="h5 font-weight-bold mb-2 font-italic">Travel Post</h2>
+				<a class="btn btn-primary btn-large" href="/travel/<%=travelposts._id %>" style="margin-top:10px">see more</a>
+              
+            </figcaption>
+          </figure>
+        </div>
+		  <% }); %>
+		  
+		  <% lifepost.forEach(function(lifepost){ %>
+		 
+        <div class="col-lg-4">
+          <figure class="rounded p-3 bg-white shadow-sm">
+            <img src=" <%= lifepost.image %>" alt="" class="w-100 card-img-top">
+            <figcaption class="p-4 card-img-bottom">
+              <h2 class="h5 font-weight-bold mb-2 font-italic">Life Post</h2>
+				<a class="btn btn-primary btn-large" href="/life/<%=lifepost._id %>" style="margin-top:10px">see more</a>
+              
+            </figcaption>
+          </figure>
+        </div>
+		  <% }); %>
+		  
+		  <% spaceposts.forEach(function(spaceposts){ %>
+		 
+        <div class="col-lg-4">
+          <figure class="rounded p-3 bg-white shadow-sm">
+            <img src=" <%= spaceposts.image %>" alt="" class="w-100 card-img-top">
+            <figcaption class="p-4 card-img-bottom">
+              <h2 class="h5 font-weight-bold mb-2 font-italic">Space Post</h2>
+				<a class="btn btn-primary btn-large" href="/space/<%=spaceposts._id %>" style="margin-top:10px">see more</a>
+              
+            </figcaption>
+          </figure>
+        </div>
+		  <% }); %>
+      </div>
+ 	</div>
+ 	</div>
+ 	</div>
+ 	
+
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+ 	<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>	 -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>	
+</body>
+</html>
