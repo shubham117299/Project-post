@@ -8,17 +8,44 @@ var express 	=	require("express"),
 	Comment     =  require("./models/comment"),  
 	mongoose 	=   require("mongoose")
 
-mongoose.connect("mongodb://localhost/name");
+var fs = require('fs'); 
+var path = require('path'); 
+ var multer = require('multer'); 
+     require('dotenv/config'); 
 
+
+ //mongoose.connect("mongodb://localhost/name",{useNewUrlParser:true, useUnifiedTopology: true });
+
+mongoose.connect("mongodb+srv://shubham:Shubham@9189@shubh.tv9gf.mongodb.net/<dbname>?retryWrites=true&w=majority",{useNewUrlParser:true, useUnifiedTopology: true });
+ // mongodb+srv://shubh:Shubham@9189@shubh.58bqi.mongodb.net/<dbname>?retryWrites=true&w=majority
+//mongodb+srv://shubham:Shubham@9189@shubh.tv9gf.mongodb.net/<dbname>?retryWrites=true&w=majority
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
+//
 
+var fs = require('fs'); 
+var path = require('path'); 
+var multer = require('multer'); 
+  
+var storage = multer.diskStorage({ 
+    destination: (req, file, cb) => { 
+        cb(null, 'uploads') 
+    }, 
+    filename: (req, file, cb) => { 
+        cb(null, file.fieldname + '-' + Date.now()) 
+    } 
+});
+
+var upload = multer({ storage: storage });
 //LIFE
 
 var lifeSchema =new mongoose.Schema({
 	name:String,
-	image:String,
+	image:{ 
+        data: Buffer, 
+        contentType: String 
+    },
 	caption:String,
 	author : {
 		id : {
@@ -35,6 +62,8 @@ var lifeSchema =new mongoose.Schema({
 	]
 
 });
+
+
 
 var Life =mongoose.model("Life",lifeSchema);
 
@@ -361,10 +390,14 @@ app.get("/life",function(req,res){
 	//res.render("education");
 });
 
-app.post("/life", isLoggedIn ,function(req,res){
+app.post("/life", upload.single('image') ,function(req,res){
 	// res.send("education post");
 	var name = req.body.name;
-	var image  = req.body.image;
+	var image  = { 
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)), 
+            contentType: 'image/png'
+        } ;
+	
 	var caption = req.body.caption;
 	var author ={
 		id : req.user._id,
