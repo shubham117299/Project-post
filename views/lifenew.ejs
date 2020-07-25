@@ -86,13 +86,15 @@
 			<!-- <h1 style="text-align:center;">Create a new education post</h1> -->
 			<div style="width:30%; margin: 30px auto;">
 				
-				<form action="/life" method="POST">
+				<form action="/life" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<input class="form-control" type="text" name="name" placeholder="name">
 					
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" name="image" placeholder="img url">
+						<label for="image">Upload Image</label> 
+                <input type="file" id="image" 
+                       name="image" value="" required> 
 					</div>	
 					<div class="form-group">
 						<!-- <input type="text" class="form-control" name="caption" placeholder="caption"> -->

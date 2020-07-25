@@ -99,7 +99,10 @@
 		 
         <div class="col-lg-6">
           <figure class="rounded p-3 bg-white shadow-sm">
-            <img src=" <%= life.image %>" class="w-100 card-img-top">
+			  <%if(life.image.data!=undefined){%>
+            <img src="data:life/<%=life.image.contentType%>;base64, 
+                     <%=life.image.data.toString('base64')%>" class="w-100 card-img-top">
+			  <%}%>
             <figcaption class="p-4 card-img-bottom">
               <h2 class="h5 font-weight-bold mb-2 font-italic"><%= life.name %></h2>
               <!-- <p class="mb-0 text-small text-muted font-italic"></p> -->

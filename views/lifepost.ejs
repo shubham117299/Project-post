@@ -193,7 +193,8 @@ input[type="file"]{
 		 
         <div class="col-lg-12">
           <figure class="rounded p-3 bg-white shadow-sm">
-            <img src=" <%= found.image %>" class="w-100 card-img-top">
+            <img src=" data:found/<%=found.image.contentType%>;base64, 
+                     <%=found.image.data.toString('base64')%>" class="w-100 card-img-top">
             <figcaption class="p-4 card-img-bottom">
               <h2 class="h5 font-weight-bold mb-2 font-italic"><%= found.name %></h2>
               <p class="mb-0 text-small text-muted font-italic"><%= found.caption %></p>
