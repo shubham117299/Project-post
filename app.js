@@ -8,8 +8,7 @@ var express 	=	require("express"),
 	Comment     =  require("./models/comment"),  
 	mongoose 	=   require("mongoose")
 
-// mongoose.connect("mongodb://localhost/name");
-mongoose.connect("mongodb+srv://shubham:shubham9189@shubh.tv9gf.mongodb.net/shubh?retryWrites=true&w=majority");
+mongoose.connect("mongodb://localhost/name");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
