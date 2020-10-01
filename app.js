@@ -17,8 +17,7 @@ var path = require('path');
  //mongoose.connect("mongodb://localhost/name",{useNewUrlParser:true, useUnifiedTopology: true });
 
 mongoose.connect("mongodb+srv://shubham:Shubham@9189@shubh.tv9gf.mongodb.net/<dbname>?retryWrites=true&w=majority",{useNewUrlParser:true, useUnifiedTopology: true });
- // mongodb+srv://shubh:Shubham@9189@shubh.58bqi.mongodb.net/<dbname>?retryWrites=true&w=majority
-//mongodb+srv://shubham:Shubham@9189@shubh.tv9gf.mongodb.net/<dbname>?retryWrites=true&w=majority
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
@@ -147,19 +146,6 @@ var spaceSchema =new mongoose.Schema({
 var Space =mongoose.model("Space",spaceSchema);
 
 
-// Education.create({
-// 	name:"Shubh",
-// 	image:"https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-// 	caption:"just another caption"
-// },function(err,education){
-// 	if(err){
-// 		console.log(err);
-// 	}else{
-// 		console.log("Created");
-// 		console.log(education);
-// 	}
-// });
-
 app.use(require("express-session")({
 	secret: "Shubham",
 	resave:false,
@@ -182,9 +168,7 @@ app.get("/",function(req,res){
 	res.render("home",{currentUser:req.user});
 });
 
-// app.get("/user",function(req,res){
-// 	res.send("User Page");
-// });
+
 
 app.get("/about",function(req,res){
 	res.render("about");
@@ -234,40 +218,27 @@ app.get("/profile", isLoggedIn ,function(req,res){
 	if(err) {
 	console.log(err);
 	} else {
-	//res.render('users/dashboard', {currentUser: req.user, posts: posts});
-		   //console.log(educationpost);
-		   //res.render("profile",{educationposts: educationpost})
-		   //console.log()
+	
 		Friend.find({'author.id': req.user._id}, function(err, friendpost){
 	if(err) {
 	console.log(err);
 	} else {
-	//res.render('users/dashboard', {currentUser: req.user, posts: posts});
-		   //console.log(educationpost);
-		   //res.render("profile",{friendposts: friendpost})
-		   //console.log()
+	
 		Travel.find({'author.id': req.user._id}, function(err, travelpost){
 	if(err) {
 	console.log(err);
 	} else {
-	//res.render('users/dashboard', {currentUser: req.user, posts: posts});
-		   //console.log(educationpost);
-		   //res.render("profile",{travelposts: travelpost})
-		   //console.log()
+	
 		Life.find({'author.id': req.user._id}, function(err, lifepost){
 	if(err) {
 	console.log(err);
 	} else {
-	//res.render('users/dashboard', {currentUser: req.user, posts: posts});
-		   //console.log(educationpost);
-		   //res.render("profile",{lifepost: lifepost})
-		   //console.log()
+	
 		Space.find({'author.id': req.user._id}, function(err, spacepost){
 	if(err) {
 	console.log(err);
 	} else {
-	//res.render('users/dashboard', {currentUser: req.user, posts: posts});
-		   //console.log(educationpost);
+	
 		   res.render("profile",{spaceposts: spacepost,lifepost: lifepost,travelposts: travelpost,friendposts: friendpost,educationposts: educationpost});
 		   //console.log()
 	}
@@ -293,12 +264,9 @@ app.get("/profile/:id",function(req,res){
 		if(err){
 			res.redirect("/profile");
 		}else{
-			//console.log(foundEducation);
-			//res.render("post",{foundEducation: foundEducation});
+			
 			if(foundEducation!=null){
-			   //console.log(foundEducation);
-				//console.log(req.user);
-				//console.log(req.user.username);
+			   
 				res.render("post",{found: foundEducation,username:req.user.username});
 			   }else{
 
@@ -306,9 +274,7 @@ app.get("/profile/:id",function(req,res){
 					if(err){
 						res.redirect("/profile");
 					}else{
-						//console.log(foundEducation);
-						//res.render("post",{foundEducation: foundEducation});
-						//console.log(foundFriend);
+						
 						if(foundFriend!=null){
 						   //console.log(foundEducation);
 							res.render("post",{found: foundFriend});
@@ -329,8 +295,7 @@ app.get("/profile/:id",function(req,res){
 					if(err){
 						res.redirect("/profile");
 					}else{
-						//console.log(foundEducation);
-						//res.render("post",{foundEducation: foundEducation});
+						
 						if(foundLife!=null){
 						   //console.log(foundEducation);
 							res.render("post",{found: foundLife});
@@ -340,8 +305,7 @@ app.get("/profile/:id",function(req,res){
 					if(err){
 						res.redirect("/profile");
 					}else{
-						//console.log(foundEducation);
-						//res.render("post",{foundEducation: foundEducation});
+						
 						if(foundSpace!=null){
 						   //console.log(foundEducation);
 							res.render("post",{found: foundSpace});
@@ -439,8 +403,7 @@ app.post("/life/:id",isLoggedIn ,function(req,res){
 			console.log(err);
 			res.redirect("/life");
 		}else{
-			//console.log(educationcomment)
-			//console.log(req.body.comment)
+			
 			Comment.create(req.body.comment,function(err,comment){
 				if(err){
 					console.log(err);
@@ -518,8 +481,7 @@ app.post("/education/:id",isLoggedIn ,function(req,res){
 			console.log(err);
 			res.redirect("/education");
 		}else{
-			//console.log(educationcomment)
-			//console.log(req.body.comment)
+			
 			Comment.create(req.body.comment,function(err,comment){
 				if(err){
 					console.log(err);
@@ -534,19 +496,7 @@ app.post("/education/:id",isLoggedIn ,function(req,res){
 	
 });
 
-//EDIT
 
-
-
-//UPDATE
-
-
-
-// app.get("/education/:id/edit",function(req,res){
-	
-// });
-
-//Travel
 
 app.get("/travel",function(req,res){
 	Travel.find({},function(err,travel){
@@ -605,8 +555,7 @@ app.post("/education/:id",isLoggedIn ,function(req,res){
 			console.log(err);
 			res.redirect("/education");
 		}else{
-			//console.log(educationcomment)
-			//console.log(req.body.comment)
+			
 			Comment.create(req.body.comment,function(err,comment){
 				if(err){
 					console.log(err);
@@ -620,12 +569,6 @@ app.post("/education/:id",isLoggedIn ,function(req,res){
 	})
 	
 });
-// function isLoggedIn(req,res,next){
-// 	if(req.isAuthenticated()){
-// 	   	return next();
-// 	   }
-// 	res.redirect("/login");
-// }
 
 
 
@@ -688,8 +631,7 @@ app.post("/education/:id",isLoggedIn ,function(req,res){
 			console.log(err);
 			res.redirect("/education");
 		}else{
-			//console.log(educationcomment)
-			//console.log(req.body.comment)
+			
 			Comment.create(req.body.comment,function(err,comment){
 				if(err){
 					console.log(err);
@@ -763,8 +705,7 @@ app.post("/education/:id",isLoggedIn ,function(req,res){
 			console.log(err);
 			res.redirect("/education");
 		}else{
-			//console.log(educationcomment)
-			//console.log(req.body.comment)
+			
 			Comment.create(req.body.comment,function(err,comment){
 				if(err){
 					console.log(err);
